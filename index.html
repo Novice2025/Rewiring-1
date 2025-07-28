@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DABY METHOD by Teacher Daby @2025</title>
+    <!-- Google Fonts for a nice sans-serif like Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define CSS Variables for Burger King and Netflix Palettes */
+        :root {
+            /* Burger King Palette Colors */
+            --bk-red: #D40026;    /* Primary Red for accents/buttons */
+            --bk-gold: #F2A900;   /* Primary Golden Orange for headings/highlights */
+            --bk-blue: #003366;   /* Dark Blue for specific accents/buttons */
+            --bk-white: #FFFFFF;  /* White for button text/contrast */
+
+            /* Netflix Mode Colors (keeping for dark theme base) */
+            --netflix-dark: #141414; /* Deep charcoal for background */
+            --netflix-medium: #222222; /* Slightly lighter dark for cards/navbar */
+            --netflix-light-text: #E5E5E5; /* Light grey for general text */
+
+            /* Feedback colors (can be adjusted to fit BK palette more if desired, but keeping standard for clarity) */
+            --feedback-correct: #4CAF50; /* Green for correct feedback */
+            --feedback-incorrect: #FF9800; /* Orange for incorrect feedback */
+        }
+
+        /* General Body Styling - Netflix Mode */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--netflix-dark); /* Dark background */
+            color: var(--netflix-light-text); /* Light text for contrast */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll on smaller screens */
+        }
+
+        /* Header/Navbar Styling */
+        .navbar {
+            background-color: var(--netflix-medium); /* Darker grey for navbar */
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+            position: sticky; /* Keeps navbar at the top when scrolling */
+            top: 0;
+            z-index: 1000; /* Ensures navbar stays on top of other content */
+        }
+
+        /* Logo Styling */
+        .logo {
+            color: var(--bk-red); /* Burger King Red for the logo */
+            font-size: 2.2em;
+            font-weight: 700;
+            margin: 0; /* Remove default margin */
+            animation: pulse 2s infinite alternate; /* Attention-grabbing pulse effect */
+        }
+
+        /* Keyframes for the pulse animation */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.02);
+                opacity: 0.95;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+
+        /* PDF Export Button Styling */
+        .pdf-button {
+            background-color: var(--bk-gold); /* Burger King Golden Orange button */
+            color: var(--netflix-dark); /* Dark text for contrast on gold */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px; /* Rounded corners for buttons */
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for impact */
+        }
+
+        .pdf-button:hover {
+            background-color: #FFC04D; /* Slightly brighter gold on hover */
+            transform: translateY(-2px); /* Subtle lift effect */
+        }
+
+        /* Main Content Container - Simulates Netflix Content Grid/Flow */
+        .content-container {
+            display: flex;
+            flex-direction: column; /* Stacks sections vertically */
+            align-items: center; /* Centers content cards */
+            padding: 30px 5%;
+            gap: 40px; /* Space between content cards */
+            max-width: 1200px; /* Max width for content for better readability */
+            margin: 0 auto; /* Center the container itself */
+        }
+
+        /* Individual Content Card Styling */
+        .content-card {
+            background-color: var(--netflix-medium); /* Darker grey for card background */
+            border-radius: 12px; /* More rounded corners for cards */
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6); /* Deeper shadow for "pop" effect */
+            width: 100%;
+            max-width: 800px; /* Max width for individual cards */
+            box-sizing: border-box; /* Include padding in width */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease, transform 0.6s ease;
+            /* Initial state for "impact to click in sequence" */
+            opacity: 0;
+            transform: translateY(30px) scale(0.98); /* Start slightly below and smaller */
+        }
+
+        /* Animation class for "impact to click in sequence" */
+        .content-card.fade-in {
+            opacity: 1;
+            transform: translateY(0) scale(1); /* Fade in and move to original position */
+        }
+
+        .content-card:hover {
+            transform: translateY(-8px) scale(1.01); /* More pronounced lift on hover */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8); /* Stronger shadow on hover */
+        }
+
+        /* Section Title Styling - Burger King Golden Orange */
+        .section-title {
+            color: var(--bk-gold); /* Burger King Golden Orange for headings */
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Subtle text shadow */
+        }
+
+        /* Content Text Styling */
+        .content-text {
+            font-size: 1.15em;
+            margin-top: 20px;
+            color: var(--netflix-light-text);
+            line-height: 1.8; /* Improved readability */
+        }
+
+        /* Language Buttons Container */
+        .lang-buttons {
+            text-align: center;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Space between buttons */
+        }
+
+        /* Individual Language Button Styling */
+        .lang-buttons button {
+            background-color: var(--bk-red); /* Burger King Red for language buttons */
+            color: var(--bk-white); /* White text for contrast */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .lang-buttons button:hover {
+            background-color: #E0324D; /* Slightly brighter red on hover */
+            transform: translateY(-1px);
+        }
+
+        /* Active Language Button Styling */
+        .lang-buttons button.active {
+            background-color: var(--bk-gold); /* Burger King Golden Orange for active button */
+            color: var(--netflix-dark); /* Dark text for contrast */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Highlight for expressions */
+        .highlight-expression {
+            background-color: var(--bk-gold); /* Golden Orange background */
+            color: var(--netflix-dark); /* Dark text */
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold; /* Make it bold for emphasis */
+            white-space: nowrap; /* Prevent breaking across lines for short phrases */
+        }
+
+        /* Exercise Specific Styles */
+        .exercise-container {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .exercise-container h3 {
+            color: var(--bk-gold); /* Burger King Golden Orange */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .exercise-prompt, .matching-item {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--netflix-light-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .exercise-input, .matching-input {
+            background-color: #333;
+            color: var(--netflix-light-text);
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1em;
+            width: 70%;
+            max-width: 300px;
+            box-sizing: border-box;
+        }
+
+        .exercise-button {
+            background-color: var(--bk-red); /* Burger King Red */
+            color: var(--bk-white);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-left: 10px;
+        }
+
+        .exercise-button:hover {
+            background-color: #E0324D; /* Slightly brighter red on hover */
+            transform: translateY(-1px);
+        }
+
+        .play-audio-button {
+            background-color: var(--bk-blue); /* Burger King Blue */
+            color: var(--bk-white);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-left: 0;
+        }
+
+        .play-audio-button:hover {
+            background-color: #004F99; /* Slightly darker blue on hover */
+            transform: translateY(-1px);
+        }
+
+        .feedback-message {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+            min-height: 25px;
+        }
+
+        .feedback-message.correct {
+            color: var(--feedback-correct);
+        }
+
+        .feedback-message.incorrect {
+            color: var(--feedback-incorrect);
+        }
+
+        .matching-exercise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .matching-item {
+            justify-content: flex-start;
+            width: 100%;
+            text-align: left;
+        }
+
+        .matching-item span {
+            flex-grow: 1;
+        }
+
+        .matching-input {
+            width: 100px;
+            margin-left: 10px;
+        }
+
+        /* Quick References specific styles */
+        .quick-references ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .quick-references ul li {
+            background-color: #333;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 1.05em;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .quick-references ul li::before {
+            content: '•';
+            color: var(--bk-gold); /* Burger King Golden Orange */
+            font-size: 1.5em;
+            line-height: 1;
+        }
+
+        /* Hi, there! visual effect box */
+        .hi-there-effect-box {
+            background-color: #3a3a3a;
+            border: 2px solid var(--bk-gold); /* Burger King Golden Orange border */
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            height: 150px; /* Fixed height to contain words */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hi-there-effect-box .display-word {
+            font-size: 1.8em; /* Adjusted font size for better fit */
+            font-weight: bold;
+            color: var(--bk-white); /* White for strong contrast */
+            position: absolute; /* Position absolutely within the box */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            min-width: 300px; /* Adjusted for words */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Add text shadow for pop */
+        }
+
+        .hi-there-effect-box .display-word.active {
+            opacity: 1;
+        }
+
+        .hi-there-effect-box button {
+            /* Position button below the words, not absolute */
+            position: relative;
+            z-index: 10; /* Ensure button is above words */
+            margin-top: 100px; /* Push button down from the center of the box */
+            background-color: var(--bk-red); /* Burger King Red */
+            color: var(--netflix-dark); /* Changed to dark text for better contrast */
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hi-there-effect-box button:hover {
+            background-color: #E0324D; /* Slightly brighter red on hover */
+            transform: translateY(-1px);
+        }
+
+        /* New styles for the conversation type box */
+        .conversation-type-box {
+            background-color: #3a3a3a; /* Darker background for the box */
+            border: 2px solid var(--bk-gold); /* Golden Orange border */
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: left; /* Align text to the left within the box */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0; /* Start hidden for fade-in effect */
+            transform: translateY(20px); /* Start slightly below */
+        }
+
+        .conversation-type-box.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .conversation-type-box h4 {
+            color: var(--bk-gold); /* Golden Orange for subheadings */
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .conversation-type-box p {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+            color: var(--netflix-light-text);
+        }
+
+        .conversation-type-box ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .conversation-type-box ul li::before {
+            content: '👉'; /* Emoji bullet point */
+            position: absolute;
+            left: 0;
+            color: var(--bk-red); /* Red for the emoji */
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: var(--netflix-medium);
+            margin-top: 60px;
+            color: var(--netflix-light-text);
+            font-size: 0.9em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 3%;
+            }
+
+            .logo {
+                font-size: 2em;
+            }
+
+            .pdf-button {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .content-container {
+                padding: 20px 3%;
+                gap: 30px;
+            }
+
+            .content-card {
+                padding: 30px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .content-text {
+                font-size: 1em;
+            }
+
+            .lang-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .lang-buttons button {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            .exercise-input, .matching-input {
+                width: 90%;
+                max-width: none;
+            }
+
+            .exercise-button, .play-audio-button {
+                margin-top: 10px;
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .exercise-prompt {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .matching-exercise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .matching-column {
+                align-items: center;
+            }
+            .matching-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .matching-input {
+                margin-left: 0;
+                margin-top: 5px;
+                width: 80%;
+            }
+
+            .hi-there-effect-box {
+                height: 120px; /* Adjust height for smaller screens */
+            }
+            .hi-there-effect-box .display-word {
+                font-size: 1.5em; /* Adjusted font size for smaller screens */
+                min-width: 250px; /* Adjusted for longer phrases */
+            }
+            .hi-there-effect-box button {
+                margin-top: 80px; /* Adjust button position for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.6em;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .hi-there-effect-box {
+                height: 100px; /* Further adjust height for very small screens */
+            }
+            .hi-there-effect-box .display-word {
+                font-size: 1.2em; /* Further adjusted font size */
+                min-width: 180px; /* Adjusted for longer phrases */
+            }
+            .hi-there-effect-box button {
+                margin-top: 60px; /* Further adjust button position */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo">LinguaFlix</h1>
+        <button id="exportPdfBtn" class="pdf-button">Export to PDF</button>
+    </header>
+
+    <main class="content-container">
+
+        <!-- Section 1: Introduction -->
+        <section id="intro" class="content-card">
+            <h2 class="section-title"
+                data-lang-en="Daby takes you onboard to <span class='highlight-expression'>'Rewiring your English'</span>!"
+                data-lang-pt="Daby te leva a bordo para <span class='highlight-expression'>'Religando seu Inglês'</span>!">
+                <!-- Default content will be set by JS on load -->
+            </h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="**My purpose:** Discover a new way to learn expressions with Teacher Daby! This platform is designed to make language learning engaging and fun, blending a familiar visual style with clear, accessible content.
+                 <br><br>
+                 <strong>Technique and advice:</strong>
+                 <ul>
+                     <li>1. Take it serious.</li>
+                     <li>2. Make these RECOMMENDED changes.</li>
+                     <li>3. Take notes on a piece of paper/Spreadsheet to start the process of memorising.</li>
+                     <li>4. Stop using your OLD ENGLISH - ACCEPT THE CHANGES as it is a process of REWIRING YOUR ENGLISH.</li>
+                 </ul>"
+                 data-lang-pt="**Meu propósito:** Descubra uma nova forma de aprender expressões com a Teacher Daby! Esta plataforma foi projetada para tornar o aprendizado de idiomas envolvente e divertido, misturando um estilo visual familiar com conteúdo claro e acessível.
+                 <br><br>
+                 <strong>Técnica e conselhos:</strong>
+                 <ul>
+                     <li>1. Leve a sério.</li>
+                     <li>2. Faça estas mudanças RECOMENDADAS.</li>
+                     <li>3. Faça anotações em um pedaço de papel/planilha para iniciar o processo de memorização.</li>
+                     <li>4. Pare de usar seu INGLÊS ANTIGO - ACEITE AS MUDANÇAS, pois é um processo de RELIGAR SEU INGLÊS.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: Conversation Type Box -->
+            <div class="conversation-type-box">
+                <p data-lang-en="<h4>Casual conversations:</h4> Informal exchanges among friends, family, or close colleagues. All the expressions you will learn are easy and fine to use in <span class='highlight-expression'>Casual conversations</span>.
+                <br><br>
+                <h4>Formal language:</h4> Will be used in a very serious situation."
+                   data-lang-pt="<h4>Conversas casuais:</h4> Trocas informais entre amigos, família ou colegas próximos. Todas as expressões que você aprenderá são fáceis e adequadas para <span class='highlight-expression'>conversas casuais</span>.
+                <br><br>
+                <h4>Linguagem formal:</h4> Será usada em situações muito sérias.">
+                    <!-- Content populated by JS -->
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Expression 1: "Hi, there!" -->
+        <section id="expression1" class="content-card">
+            <h2 class="section-title">Expression 1: <span class="highlight-expression">"Hi, there!"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: A friendly, informal greeting. It's a common way to say <span class='highlight-expression'>'hello'</span> to someone you know or are about to interact with, often implying a slight sense of surprise or noticing someone. It can be used to initiate a conversation or acknowledge someone's presence.
+                 <br><br><strong>Dica da Teacher Daby para Você:</strong> <span class='highlight-expression'>'Hi, there!'</span> é muito versátil! Pense nele como um <span class='highlight-expression'>'Olá!'</span> ou <span class='highlight-expression'>'Oi!'</span> que você usa quando quer chamar a atenção de alguém de forma leve, ou quando você está se aproximando de um grupo. É menos formal que <span class='highlight-expression'>'Hello'</span> e mais direto que apenas <span class='highlight-expression'>'Hi'</span>. É ótimo para situações casuais!
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>In regular meetings</li>
+                     <li>In important meetings</li>
+                     <li>In casual conversation</li>
+                     <li>In friendly conversation</li>
+                     <li>In public places</li>
+                     <li>In a presentation at work <br><br>⚠️ <strong>CAUTION: Never say <span class='highlight-expression'>'Hi, there, [name]'</span>.</strong> For example, avoid <span class='highlight-expression'>'Hi, there, John.'</span> Instead, use <span class='highlight-expression'>'Hello, John'</span> or <span class='highlight-expression'>'Good morning, John.'</span>
+                     <br><br>⚠️ <strong>CAUTION: Never combine <span class='highlight-expression'>'Hi, there!'</span> with other greetings like <span class='highlight-expression'>'Good morning'</span> or <span class='highlight-expression'>'Good afternoon'</span>. For example, avoid <span class='highlight-expression'>'Hi, there, good morning!'</span>. These are separate greetings.</strong>
+                     <br><br>⚠️ <strong>CAUTION: Never use <span class='highlight-expression'>'Good morning'</span>, <span class='highlight-expression'>'Good afternoon'</span>, or <span class='highlight-expression'>'Good evening'</span> as a standalone greeting in your emails. It is unprofessional and not typically done by native English speakers. Instead, use a full sentence like <span class='highlight-expression'>'Good morning, [Name],'</span> or <span class='highlight-expression'>'Hello, [Name],'</span>.</strong></li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: "Hi, there!" visual effect box -->
+            <div class="hi-there-effect-box">
+                <span id="hiWord" class="display-word active">Hi</span>
+                <span id="hiThereWord" class="display-word">Hi, there!</span>
+                <button id="toggleGreetingBtn">See the difference!</button>
+            </div>
+
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="How would you use <span class='highlight-expression'>'oi / olá'</span> to greet someone?" data-lang-pt="Como você usaria <span class='highlight-expression'>'oi / olá'</span> para cumprimentar alguém?"></span>
+                    <button class="play-audio-button" data-text-en="How would you use 'oi / olá' to greet someone?" data-text-pt="Como você usaria 'oi / olá' para cumprimentar alguém?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for Hi, there!">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- Section 3: Expression 2: "How are you doing?" -->
+        <section id="expression2" class="content-card">
+            <h2 class="section-title">Expression 2: <span class="highlight-expression">"How are you doing?"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: A common, informal way to ask about someone's well-being or current situation. It's often used as a general greeting, similar to <span class='highlight-expression'>'How do you do?'</span>.
+                 <br><br><strong>Dica da Teacher Daby para Você:</strong> Esta é uma saudação muito versátil e natural em inglês. Você pode usá-la em quase todas as situações informais, seja com amigos, colegas de trabalho ou conhecidos. A resposta mais comum é <span class='highlight-expression'>'I'm doing well, thank you! And yourself?'</span> or simplesmente <span class='highlight-expression'>'Good, thanks!'</span>.
+                 <br><br>⚠️ <strong>CAUTION: Avoid using <span class='highlight-expression'>'What's up?'</span> as it is very informal and generally not appropriate for professional or formal settings.</strong>
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>In casual conversations with friends and family</li>
+                     <li>When meeting someone new in an informal setting</li>
+                     <li>As a general greeting to colleagues at work (informal office environment)</li>
+                     <li><li>When catching up with someone you haven't seen in a while</li>
+                     <li>As an opening to a conversation to show interest in the other person's state</li>
+                     <li>In informal emails or messages to friends</li>
+                 </ul>
+                 <br>
+                 <strong>Note on formality:</strong> While <span class='highlight-expression'>'How are you doing?'</span> is generally informal, it is widely accepted in many professional settings that are not highly formal (e.g., a casual team meeting, a quick chat in the hallway). For very formal situations (e.g., a job interview, a formal presentation to executives), <span class='highlight-expression'>'How do you do?'</span> or <span class='highlight-expression'>'Good morning/afternoon/evening'</span> might be preferred."
+                 data-lang-pt="Significado: Uma forma comum e informal de perguntar sobre o bem-estar ou a situação atual de alguém. É frequentemente usada como uma saudação geral, semelhante a <span class='highlight-expression'>'Como vai?'</span>.
+                 <br><br><strong>Dica da Teacher Daby para Você:</strong> Esta é uma saudação muito versátil e natural em inglês. Você pode usá-la em quase todas as situações informais, seja com amigos, colegas de trabalho ou conhecidos. A resposta mais comum é <span class='highlight-expression'>'Estou bem, obrigado! E você?'</span> ou simplesmente <span class='highlight-expression'>'Bem, obrigado!'</span>.
+                 <br><br>⚠️ <strong>CUIDADO: Evite usar <span class='highlight-expression'>'E aí?'</span> (equivalente a 'What's up?') pois é muito informal e geralmente não é apropriado para ambientes profissionais ou formais.</strong>
+                 <br><br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Em conversas casuais com amigos e familiares</li>
+                     <li>Ao conhecer alguém novo em um ambiente informal</li>
+                     <li>Como uma saudação geral para colegas de trabalho (ambiente de escritório informal)</li>
+                     <li>Ao reencontrar alguém que você não vê há algum tempo</li>
+                     <li>Como uma abertura para a conversa para demonstrar interesse no estado da outra pessoa</li>
+                     <li>Em e-mails ou mensagens informais para amigos</li>
+                 </ul>
+                 <br>
+                 <strong>Nota sobre formalidade:</strong> Embora <span class='highlight-expression'>'How are you doing?'</span> seja geralmente informal, é amplamente aceita em muitos ambientes profissionais que não são altamente formais (por exemplo, uma reunião de equipe casual, um bate-papo rápido no corredor). Para situações muito formais (por exemplo, uma entrevista de emprego, uma apresentação formal para executivos), <span class='highlight-expression'>'How do you do?'</span> ou <span class='highlight-expression'>'Bom dia/boa tarde/boa noite'</span> podem ser preferíveis.">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: "How are you doing?" visual effect box (replicated from Hi, there!) -->
+            <div class="hi-there-effect-box">
+                <span id="howDoingWord" class="display-word active" data-lang-en="How are you?" data-lang-pt="Como você está?">How are you?</span>
+                <span id="howsItGoingWord" class="display-word" data-lang-en="How are you doing?" data-lang-pt="Como você está?">How are you doing?</span>
+                <button id="toggleHowDoingBtn">See the difference!</button>
+            </div>
+
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="How would you respond to <span class='highlight-expression'>'How are you doing?'</span>" data-lang-pt="Como você responderia a <span class='highlight-expression'>'Como você está?'</span>"></span>
+                    <button class="play-audio-button" data-text-en="How would you respond to 'How are you doing?'" data-text-pt="Como você responderia a 'Como você está?'">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for How are you doing?">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+
+                <div class="exercise-prompt" style="margin-top: 20px;">
+                    <span data-lang-en="How would you greet a client CEO in a board meeting?" data-lang-pt="Como você cumprimentaria o CEO de um cliente em uma reunião de diretoria?"></span>
+                    <button class="play-audio-button" data-text-en="How would you greet a client CEO in a board meeting?" data-text-pt="Como você cumprimentaria o CEO de um cliente em uma reunião de diretoria?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for formal greeting">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- Section 4: Expression 3: "How are you holding up?" -->
+        <section id="expression3" class="content-card">
+            <h2 class="section-title">Expression 3: <span class="highlight-expression">"How are you holding up?"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: A way to ask someone how they are coping with a difficult or challenging situation. It implies concern for their emotional or physical well-being during a tough time.
+                 <br><br><strong>Teacher Daby's Tip for You:</strong> Use <span class='highlight-expression'>'How are you holding up?'</span> when you know the person is going through a difficult time, such as after a loss, high work stress, or an illness. It's a deeper question than a simple 'Como você está?', showing that you care about their emotional state.
+                 <br><br>
+                 <strong>Brazilian Portuguese Equivalents:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Como você está se virando?'</span> (How are you getting by/managing?)</li>
+                     <li><span class='highlight-expression'>'Como você está aguentando?'</span> (How are you enduring/holding up?)</li>
+                     <li><span class='highlight-expression'>'Como você tem passado?'</span> (em um contexto de dificuldade) (How have you been doing? - in a context of difficulty)</li>
+                 </ul>
+                 <br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When someone is dealing with a personal loss or grief.</li>
+                     <li>When a colleague is under a lot of work pressure or stress.</li>
+                     <li>After a major event, like an accident or a natural disaster, to check on someone's recovery.</li>
+                     <li><li>When someone is facing a long-term illness or a challenging recovery period.</li>
+                     <li>In a supportive conversation with a friend going through a tough time.</li>
+                 </ul>"
+                 data-lang-pt="Significado: Uma forma de perguntar a alguém como ela está lidando com uma situação difícil ou desafiadora. Implica preocupação com o bem-estar emocional ou físico dela durante um período complicado.
+                 <br><br><strong>Dica da Teacher Daby para Você:</strong> Use <span class='highlight-expression'>'How are you holding up?'</span> quando souber que a pessoa está passando por um momento difícil, como após uma perda, um grande estresse no trabalho, ou uma doença. É uma pergunta mais profunda do que um simples 'Como você está?', mostrando que você se importa com o estado emocional dela.
+                 <br><br>
+                 <strong>Equivalentes em Português (Brasil):</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Como você está se virando?'</span> (How are you getting by/managing?)</li>
+                     <li><span class='highlight-expression'>'Como você está aguentando?'</span> (How are you enduring/holding up?)</li>
+                     <li><span class='highlight-expression'>'Como você tem passado?'</span> (em um contexto de dificuldade) (How have you been doing? - in a context of difficulty)</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Quando alguém está lidando com uma perda pessoal ou luto.</li>
+                     <li>Quando um colega está sob muita pressão ou estresse no trabalho.</li>
+                     <li>Após um grande evento, como um acidente ou um desastre natural, para verificar a recuperação de alguém.</li>
+                     <li>Quando alguém está enfrentando uma doença de longo prazo ou um período de recuperação desafiador.</li>
+                     <li>Em uma conversa de apoio com um amigo que está passando por um momento difícil.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="Describe a situation where you would ask <span class='highlight-expression'>'How are you holding up?'</span>" data-lang-pt="Descreva uma situação onde você perguntaria <span class='highlight-expression'>'Como você está se mantendo?'</span>"></span>
+                    <button class="play-audio-button" data-text-en="Describe a situation where you would ask 'How are you holding up?'" data-text-pt="Descreva uma situação onde você perguntaria 'Como você está se mantendo?'">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for How are you holding up?">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- Section 5: Expression 4: "Long time no see / talk" -->
+        <section id="expression4" class="content-card">
+            <h2 class="section-title">Expression 4: <span class="highlight-expression">"Long time no see / talk"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: A casual greeting used when you haven't seen or spoken to someone in a long time. It conveys a sense of pleasant surprise and acknowledges the gap in communication.
+                 <br><br><strong>Teacher Daby's Tip for You:</strong> This expression is very common and friendly. Use 'Long time no see' when you meet someone in person after a long period, and 'Long time no talk' when you haven't spoken on the phone or online for a while. It's a great way to restart a conversation with someone you haven't connected with recently.
+                 <br><br>
+                 <strong>Brazilian Portuguese Equivalents:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Quanto tempo!'</span> (Literal: How much time! - Common usage: Long time!) - This is the most direct and versatile equivalent, used for both seeing and talking.</li>
+                     <li><span class='highlight-expression'>'Faz tempo que não te vejo/falo!'</span> (Literal: It's been a while since I don't see/talk to you! - Common usage: It's been a while since I've seen/talked to you!) - This is more explicit, specifying 'see' or 'talk' as needed.</li>
+                     <li><span class='highlight-expression'>'Sumido(a)!'</span> (Literal: Missing one! - Common usage: You've been missing! / Haven't seen you around!) - This is a very informal and affectionate way to greet someone who has been absent, implying they've been 'missing' from your life or interactions. It's often used among close friends and family.</li>
+                     <li><span class='highlight-expression'>'E aí, tudo bem?'</span> (Literal: Hey there, all good? - Common usage: Hey, how's it going? / What's up?) - While not a direct translation of 'long time no see/talk', this is a very common informal opening in Brazil when reconnecting, often followed by a remark about the time passed.</li>
+                 </ul>
+                 <br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When unexpectedly running into an old friend at the supermarket or a coffee shop.</li>
+                     <li>Starting a phone call or video call with a family member or friend you haven't connected with in months.</li>
+                     <li>Greeting a former colleague at a professional event or sending a message to someone you haven't chatted with for a while.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="Imagine you are greeting a friend you haven't seen or spoken to in a long time. How would you greet them using this expression?" data-lang-pt="Imagine que você está cumprimentando um amigo que você não vê ou com quem não fala há muito tempo. Como você o cumprimentaria usando esta expressão?"></span>
+                    <button class="play-audio-button" data-text-en="Imagine you are greeting a friend you haven't seen or spoken to in a long time. How would you greet them using this expression?" data-text-pt="Imagine que você está cumprimentando um amigo que você não vê ou com quem não fala há muito tempo. Como você o cumprimentaria usando esta expressão?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for Long time no see / talk">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Expression 5: "How is life treating you?" -->
+        <section id="expression5" class="content-card">
+            <h2 class="section-title">Expression 5: <span class="highlight-expression">"How is life treating you?"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: An informal and friendly way to ask someone about their general well-being and how things are going in their life, often implying a deeper level of interest than a simple 'How are you?'. It's used when you genuinely want to know about their experiences, challenges, or successes.
+                 <br><br><strong>Teacher Daby's Tip for You:</strong> This expression is perfect for catching up with someone you haven't spoken to in a while, or when you know they've been through significant life changes (positive or negative). It opens the door for a more detailed conversation about their life circumstances. It's more personal than 'How are you doing?' and shows genuine care.
+                 <br><br>
+                 <strong>Brazilian Portuguese Equivalents:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Como a vida tem te tratado?'</span> (Literal: How has life been treating you?) - This is the most direct and common translation.</li>
+                     <li><span class='highlight-expression'>'Como as coisas estão indo para você?'</span> (Literal: How are things going for you?) - A more general alternative.</li>
+                     <li><span class='highlight-expression'>'Como você está levando a vida?'</span> (Literal: How are you taking life? - Common usage: How are you managing life?) - Implies coping with life's circumstances.</li>
+                 </ul>
+                 <br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When reconnecting with an old friend or family member after a long period of no contact.</li>
+                     <li>To inquire about someone's adjustment after a major life event, such as moving to a new city, starting a new job, or after a significant personal change.</li>
+                     <li>In a casual conversation with a colleague you know well, especially if you're aware they've been dealing with a busy period or a new project.</li>
+                     <li>As a thoughtful opening in a message or call to someone you care about, indicating you're interested in more than a superficial update.</li>
+                 </ul>"
+                 data-lang-pt="Significado: Uma forma informal e amigável de perguntar a alguém sobre o seu bem-estar geral e como as coisas estão indo em sua vida, muitas vezes implicando um nível mais profundo de interesse do que um simples 'Como você está?'. É usada quando você realmente quer saber sobre suas experiências, desafios ou sucessos.
+                 <br><br><strong>Dica da Teacher Daby para Você:</strong> Essa expressão é perfeita para reencontrar alguém com quem você não fala há um tempo, ou quando você sabe que a pessoa passou por mudanças significativas na vida (positivas ou negativas). Ela abre a porta para uma conversa mais detalhada sobre as circunstâncias da vida da pessoa. É mais pessoal do que 'Como você está?' e mostra cuidado genuíno.
+                 <br><br>
+                 <strong>Equivalentes em Português (Brasil):</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Como a vida tem te tratado?'</span> (Literal: How has life been treating you?) - Esta é a tradução mais direta e comum.</li>
+                     <li><span class='highlight-expression'>'Como as coisas estão indo para você?'</span> (Literal: How are things going for you?) - Uma alternativa mais geral.</li>
+                     <li><span class='highlight-expression'>'Como você está levando a vida?'</span> (Literal: How are you taking life? - Uso comum: Como você está se virando na vida?) - Implica lidar com as circunstâncias da vida.</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Ao reencontrar um velho amigo ou familiar após um longo período sem contato.</li>
+                     <li>Para perguntar sobre a adaptação de alguém após um grande evento na vida, como mudar para uma nova cidade, começar um novo emprego ou após uma mudança pessoal significativa.</li>
+                     <li>Em uma conversa casual com um colega que você conhece bem, especialmente se você sabe que ele(a) tem lidado com um período agitado ou um novo projeto.</li>
+                     <li>Como uma abertura atenciosa em uma mensagem ou ligação para alguém que você se importa, indicando que você está interessado(a) em mais do que uma atualização superficial.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="Describe a situation where you would ask <span class='highlight-expression'>'How is life treating you?'</span>" data-lang-pt="Descreva uma situação onde você perguntaria <span class='highlight-expression'>'Como você está se mantendo?'</span>"></span>
+                    <button class="play-audio-button" data-text-en="Describe a situation where you would ask 'How is life treating you?'" data-text-pt="Descreva uma situação onde você perguntaria 'Como você está se mantendo?'">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for How are you holding up?">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Expression 6: "Same old, same old / Nothing much / Not much, just the basic" -->
+        <section id="expression6" class="content-card">
+            <h2 class="section-title">Expression 6:
+                <span class="highlight-expression">"Same old, same old"</span> /
+                <span class="highlight-expression">"Nothing much"</span> /
+                <span class="highlight-expression">"Not much, just the basic"</span> /
+                <span class="highlight-expression">"Same shit different day"</span>
+            </h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: These are informal and common responses to questions like 'How are you doing?' or 'What's up?'. They indicate that nothing significant or unusual is happening in your life; things are proceeding as usual, without major changes or exciting news.
+                 <br><br>
+                 <ul>
+                     <li><span class='highlight-expression'>'Same old, same old.'</span>: Implies a sense of routine or predictability.</li>
+                     <li><span class='highlight-expression'>'Nothing much.'</span>: A concise way to say there's no new or exciting information.</li>
+                     <li><span class='highlight-expression'>'Not much, just the basic.'</span>: A specific, informal response indicating you're occupied with routine tasks or simply going about your day.</li>
+                     <li><span class='highlight-expression'>'Same shit different day.'</span>: A highly informal and somewhat cynical expression indicating that daily life is monotonous and unchanging, often used to express mild frustration or resignation. This phrase is **only for family or close colleagues at work** due to its informal and slightly vulgar nature.</li>
+                 </ul>
+                 <br><strong>Teacher Daby's Tip for You:</strong> These expressions are perfect for casual conversations when you don't have much to report or prefer to keep things brief. They are all suitable for friends, family, and close colleagues.
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When a friend asks 'How's life?' and your daily routine hasn't changed.</li>
+                     <li>As a quick response to a casual 'What's up?' from a colleague when you're busy.</li>
+                     <li>In a text message to a family member who's checking in, and you have no major updates.</li>
+                     <li>When you want to keep a conversation light and don't feel like elaborating on your day.</li>
+                 </ul>"
+                 data-lang-pt="Significado: São respostas informais e comuns a perguntas como 'Como você está?' ou 'E aí?'. Indicam que nada significativo ou incomum está acontecendo em sua vida; as coisas estão seguindo o curso normal, sem grandes mudanças ou notícias empolgantes.
+                 <br><br>
+                 <ul>
+                     <li><span class='highlight-expression'>'Tudo na mesma.'</span>: Implica uma sensação de rotina ou previsibilidade.</li>
+                     <li><span class='highlight-expression'>'Nada de novo.'</span>: Uma forma concisa de dizer que não há informações novas ou empolgantes.</li>
+                     <li><span class='highlight-expression'>'Só o básico.'</span>: Uma resposta específica e informal que indica que você está ocupado com tarefas rotineiras ou simplesmente seguindo o seu dia.</li>
+                     <li><span class='highlight-expression'>'Mesma coisa, dia diferente.'</span>: Uma expressão altamente informal e um tanto cínica que indica que a vida diária é monótona e imutável, muitas vezes usada para expressar leve frustração ou resignação. Esta frase é **apenas para familiares ou colegas de trabalho próximos** devido à sua natureza informal e ligeiramente vulgar.</li>
+                 </ul>
+                 <br><strong>Dica da Teacher Daby para Você:</strong> Essas expressões são perfeitas para conversas casuais quando você não tem muito a relatar ou prefere ser breve. Todas são adequadas para amigos, familiares e colegas próximos.
+                 <br><br>
+                 <strong>Equivalentes em Português (Brasil):</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Tudo na mesma.'</span> (Uso comum: Sem novidades / Tudo igual.)</li>
+                     <li><span class='highlight-expression'>'Nada de novo.'</span> (Uso comum: Nada de novo.)</li>
+                     <li><span class='highlight-expression'>'De sempre.'</span> (Uso comum: O de sempre / O habitual.)</li>
+                     <li><span class='highlight-expression'>'Na rotina.'</span> (Uso comum: Só a rotina.)</li>
+                     <li><span class='highlight-expression'>'Mesma coisa, dia diferente.'</span> (Uso comum: Mesma coisa de sempre.)</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Quando um amigo pergunta 'Como está a vida?' e sua rotina diária não mudou.</li>
+                     <li>Como uma resposta rápida a um 'E aí?' casual de um colega quando você está ocupado.</li>
+                     <li>Em uma mensagem de texto para um familiar que está perguntando como você está, e você não tem grandes novidades.</li>
+                     <li>Quando você quer manter a conversa leve e não tem vontade de elaborar sobre o seu dia.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="How would you respond to 'What's new?' if nothing significant has happened?" data-lang-pt="Como você responderia a 'O que há de novo?' se nada significativo aconteceu?"></span>
+                    <button class="play-audio-button" data-text-en="How would you respond to 'What's new?' if nothing significant has happened?" data-text-pt="Como você responderia a 'O que há de novo?' if nothing significant has happened?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for Same old, same old">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- Section 7: Expression 7: "Deixa que eu te apresento o Daby" -->
+        <section id="expression7" class="content-card">
+            <h2 class="section-title">Expression 7: <span class="highlight-expression">"Deixa que eu te apresento o Daby"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: This phrase is a common and informal way to offer to introduce someone. It literally translates to 'Let me introduce you to Daby.' It's used when you want to facilitate an introduction between two or more people.
+                 <br><br><strong>Teacher Daby's Tip for You:</strong> Use <span class='highlight-expression'>'Deixa que eu te apresento [nome]'</span> when you are in an informal setting and want to smoothly introduce someone to another person. It's a very natural and friendly way to make connections.
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When a friend arrives at a gathering where they don-t know everyone, and you want to introduce them to others.</li>
+                     <li>In a casual work environment, when a new team member joins a small group discussion, and you offer to introduce them.</li>
+                     <li>When you are with a family member and a friend who haven-t met, and you take the initiative to introduce them.</li>
+                 </ul>"
+                 data-lang-pt="Significado: Esta frase é uma forma comum e informal de se oferecer para apresentar alguém. Literalmente significa 'Let me introduce you to Daby.' É usada quando você quer facilitar uma apresentação entre duas ou mais pessoas.
+                 <br><br><strong>Dica da Teacher Daby para Você:</strong> Use <span class='highlight-expression'>'Deixa que eu te apresento [nome]'</span> quando você estiver em um ambiente informal e quiser apresentar alguém a outra pessoa de forma natural. É uma maneira muito amigável de fazer conexões.
+                 <br><br>
+                 <strong>Estrutura Gramatical:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Deixa que eu'</span>: É uma forma informal de dizer 'Deixe-me' ou 'Permita-me'.</li>
+                     <li><span class='highlight-expression'>'te apresento'</span>: Significa 'apresento você'.</li>
+                     <li>A estrutura completa é: <span class='highlight-expression'>'Deixa que eu'</span> + <span class='highlight-expression'>'te apresento'</span> + <span class='highlight-expression'>'[nome]'</span>.</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Quando um amigo chega a um encontro onde ele não conhece todo mundo, e você quer apresentá-lo aos outros.</li>
+                     <li>Em um ambiente de trabalho casual, quando um novo membro da equipe se junta a uma pequena discussão em grupo, e você se oferece para apresentá-lo.</li>
+                     <li>Quando você está com um familiar e um amigo que ainda não se conhecem, e você toma a iniciativa de apresentá-los.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: "Deixa que eu te apresento o Daby" visual effect box -->
+            <div class="hi-there-effect-box">
+                <span id="dabyPtWord" class="display-word active" data-lang-en="Let me introduce you to Daby." data-lang-pt="Deixa que eu te apresento o Daby.">Deixa que eu te apresento o Daby.</span>
+                <span id="dabyEnWord" class="display-word" data-lang-en="Let me introduce you to Daby." data-lang-pt="Let me introduce you to Daby.">Let me introduce you to Daby.</span>
+                <button id="toggleDabyBtn">See the translation!</button>
+            </div>
+
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="Imagine you are at a casual gathering and want to introduce your friend, Maria, to another friend, João. How would you introduce Maria to João using this expression?" data-lang-pt="Imagine que você está em um encontro casual e quer apresentar sua amiga, Maria, a outro amigo, João. Como você apresentaria Maria a João usando esta expressão?"></span>
+                    <button class="play-audio-button" data-text-en="Imagine you are at a casual gathering and want to introduce your friend, Maria, to another friend, João. How would you introduce Maria to João using this expression?" data-text-pt="Imagine que você está cumprimentando um amigo que você não vê ou com quem não fala há muito tempo. Como você o cumprimentaria usando esta expressão?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for Deixa que eu te apresento o Daby">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Expression 8: "Pleased to meet you. / The pleasure is all mine. / It was a pleasure." -->
+        <section id="expression8" class="content-card">
+            <h2 class="section-title">Expression 8:
+                <span class="highlight-expression">"Pleased to meet you."</span> /
+                <span class="highlight-expression">"The pleasure is all mine."</span> /
+                <span class="highlight-expression">"It was a pleasure."</span>
+            </h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: These phrases are polite and common ways to express satisfaction upon meeting someone or after an interaction.
+                 <br><br>
+                 <ul>
+                     <li><span class='highlight-expression'>'Pleased to meet you.'</span>: A formal and polite greeting when meeting someone for the first time.</li>
+                     <li><span class='highlight-expression'>'The pleasure is all mine.'</span>: A polite response to 'Pleased to meet you.' or 'Nice to meet you,' emphasizing that the enjoyment of the meeting was primarily yours.</li>
+                     <li><span class='highlight-expression'>'It was a pleasure.'</span>: Used after an interaction or meeting has concluded, to express that the experience was enjoyable.</li>
+                 </ul>
+                 <br><strong>Teacher Daby's Tip for You:</strong> 'Pleased to meet you' is a versatile and slightly more formal alternative to 'Nice to meet you.' 'The pleasure is all mine' is a great way to show extra politeness in response. 'It was a pleasure' is perfect for concluding a conversation or meeting on a positive note.
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When meeting a new client or business partner.</li>
+                     <li>After being introduced to someone at a formal event.</li>
+                     <li>As a polite closing remark after a successful meeting or interview.</li>
+                     <li>When responding to someone who has just said 'Pleased to meet you.'</li>
+                 </ul>"
+                 data-lang-pt="Significado: Estas frases são formas educadas e comuns de expressar satisfação ao conhecer alguém ou após uma interação.
+                 <br><br>
+                 <ul>
+                     <li><span class='highlight-expression'>'Prazer em conhecê-lo.'</span>: Uma saudação formal e educada ao conhecer alguém pela primeira vez.</li>
+                     <li><span class='highlight-expression'>'O prazer é meu.'</span>: Uma resposta educada a 'Prazer em conhecê-lo.' ou 'Nice to meet you', enfatizando que o prazer do encontro foi principalmente seu.</li>
+                     <li><span class='highlight-expression'>'Foi um prazer.'</span>: É usado após a conclusão de uma interação ou encontro, para expressar que a experiência foi agradável.</li>
+                 </ul>
+                 <br><strong>Dica da Teacher Daby para Você:</strong> 'Pleased to meet you' é uma alternativa versátil e um pouco mais formal a 'Nice to meet you'. 'O prazer é meu' é uma ótima maneira de demonstrar polidez extra como resposta. 'Foi um prazer' é perfeito para encerrar uma conversa ou reunião de forma positiva.
+                 <br><br>
+                 <strong>Estrutura Gramatical:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Pleased to meet you.'</span> = `[Adjetivo] + to + [Verbo no infinitivo] + [Pronome Objeto]` (e.g., `Pleased to meet you.`)</li>
+                     <li><span class='highlight-expression'>'The pleasure is all mine.'</span> = `The pleasure + is + all + mine.` (Estrutura fixa para enfatizar posse).</li>
+                     <li><span class='highlight-expression'>'It was a pleasure.'</span> = `It + was + a + pleasure.` (Estrutura simples no passado).</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Ao conhecer um novo cliente ou parceiro de negócios.</li>
+                     <li>Após ser apresentado a alguém em um evento formal.</li>
+                     <li>Como uma observação de encerramento educada após uma reunião ou entrevista bem-sucedida.</li>
+                     <li>Ao responder a alguém que acabou de dizer 'Pleased to meet you.'</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: "Prazer em conhecê-lo" visual effect box -->
+            <div class="hi-there-effect-box">
+                <span id="pleasedPtWord" class="display-word active" data-lang-en="Pleased to meet you." data-lang-pt="Prazer em conhecê-lo.">Prazer em conhecê-lo.</span>
+                <span id="pleasureMinePtWord" class="display-word" data-lang-en="The pleasure is all mine." data-lang-pt="O prazer é meu.">O prazer é meu.</span>
+                <span id="itWasPleasurePtWord" class="display-word" data-lang-en="It was a pleasure." data-lang-pt="Foi um prazer.">Foi um prazer.</span>
+                <button id="togglePleasedBtn">See the translations!</button>
+            </div>
+
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="How would you express pleasure when meeting someone for the first time?" data-lang-pt="Como você expressaria prazer ao conhecer alguém pela primeira vez?"></span>
+                    <button class="play-audio-button" data-text-en="How would you express pleasure when meeting someone for the first time?" data-text-pt="Como você expressaria prazer ao conhecer alguém pela primeira vez?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for Prazer em conhecê-lo.">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+
+                <div class="exercise-prompt" style="margin-top: 20px;">
+                    <span data-lang-en="How would you respond if someone said 'Pleased to meet you'?" data-lang-pt="Como você responderia se alguém dissesse 'Pleased to meet you'?"></span>
+                    <button class="play-audio-button" data-text-en="How would you respond if someone said 'Pleased to meet you'?" data-text-pt="Como você responderia se alguém dissesse 'Pleased to meet you'?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for The pleasure is all mine.">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+
+                <div class="exercise-prompt" style="margin-top: 20px;">
+                    <span data-lang-en="How would you conclude a pleasant meeting?" data-lang-pt="Como você encerraria uma reunião agradável?"></span>
+                    <button class="play-audio-button" data-text-en="How would you conclude a pleasant meeting?" data-text-pt="Como você encerraria uma reunião agradável?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for It was a pleasure.">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Expression 9: "De nada. / Não há de quê. / Disponha / Imagina!" -->
+        <section id="expression9" class="content-card">
+            <h2 class="section-title">Expression 9:
+                <span class="highlight-expression">"De nada."</span> /
+                <span class="highlight-expression">"Não há de quê."</span> /
+                <span class="highlight-expression">"Disponha"</span> /
+                <span class="highlight-expression">"Imagina!"</span>
+            </h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: These are common and polite ways to respond when someone thanks you. They convey that the help or favor was no trouble, or that you were happy to provide it.
+                 <br><br>
+                 <strong>English Equivalents & Usage:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'You're welcome.'</span>: The most standard and universally polite response.</li>
+                     <li><span class='highlight-expression'>'No problem.'</span>: Informal, very common, suggests it was easy to help.</li>
+                     <li><span class='highlight-expression'>'My pleasure.'</span>: More formal, emphasizes that you enjoyed helping.</li>
+                     <li><span class='highlight-expression'>'Anytime.'</span>: Informal, implies you're happy to help again in the future.</li>
+                     <li><span class='highlight-expression'>'Don't mention it.'</span>: Polite, dismisses the need for thanks, implying it was a small thing.</li>
+                     <li><span class='highlight-expression'>'Cheers.'</span>: Primarily British English, very informal. Can mean 'thank you' or 'goodbye'. As a response to thanks, it's used in very casual settings, often implying 'you're welcome' or 'no worries'.</li>
+                 </ul>
+                 <br>
+                 <strong>Teacher Daby's Tip for You:</strong> Choose the response that best fits the formality of the situation and your relationship with the person. 'You're welcome' is always a safe bet.
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>After someone thanks you for holding a door open.</li>
+                     <li>After helping a colleague with a small task at work.</li>
+                     <li>Responding to a friend who thanks you for a favor.</li>
+                     <li>After a customer thanks you for service (use 'You're welcome' or 'My pleasure').</li>
+                 </ul>"
+                 data-lang-pt="Significado: São formas comuns e educadas de responder quando alguém te agradece. Elas transmitem que a ajuda ou o favor não foi incômodo, ou que você teve prazer em ajudar.
+                 <br><br>
+                 <strong>Equivalentes em Inglês e Uso:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'You're welcome.'</span>: A resposta mais padrão e universalmente educada.</li>
+                     <li><span class='highlight-expression'>'No problem.'</span>: Informal, muito comum, sugere que foi fácil ajudar.</li>
+                     <li><span class='highlight-expression'>'My pleasure.'</span>: Mais formal, enfatiza que você gostou de ajudar.</li>
+                     <li><span class='highlight-expression'>'Anytime.'</span>: Informal, implica que você terá prazer em ajudar novamente no futuro.</li>
+                     <li><span class='highlight-expression'>'Don't mention it.'</span>: Educado, dispensa a necessidade de agradecimento, implicando que foi algo pequeno.</li>
+                     <li><span class='highlight-expression'>'Cheers.'</span>: Principalmente inglês britânico, muito informal. Pode significar 'obrigado' ou 'adeus'. Como resposta a um agradecimento, é usado em ambientes muito casuais, muitas vezes implicando 'de nada' ou 'sem problemas'.</li>
+                 </ul>
+                 <br>
+                 <strong>Dica da Teacher Daby para Você:</strong> Escolha a resposta que melhor se adapta à formalidade da situação e ao seu relacionamento com a pessoa. 'You're welcome' é sempre uma aposta segura.
+                 <br><br>
+                 <strong>Estrutura Gramatical:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'You're welcome.'</span> = `You + are + welcome.`</li>
+                     <li><span class='highlight-expression'>'No problem.'</span> = `No + problem.`</li>
+                     <li><span class='highlight-expression'>'My pleasure.'</span> = `My + pleasure.`</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Depois que alguém te agradece por segurar uma porta.</li>
+                     <li>Depois de ajudar um colega com uma pequena tarefa no trabalho.</li>
+                     <li>Respondendo a um amigo que te agradece por um favor.</li>
+                     <li>Depois que um cliente te agradece por um serviço (use 'You're welcome' ou 'My pleasure').</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: "De nada" visual effect box -->
+            <div class="hi-there-effect-box">
+                <span id="denadaPtWord" class="display-word active" data-lang-en="You're welcome." data-lang-pt="De nada.">De nada.</span>
+                <span id="noprobPtWord" class="display-word" data-lang-en="No problem." data-lang-pt="Não há de quê.">Não há de quê.</span>
+                <span id="disponhaPtWord" class="display-word" data-lang-en="My pleasure." data-lang-pt="Disponha.">Disponha.</span>
+                <span id="imaginaPtWord" class="display-word" data-lang-en="Anytime!" data-lang-pt="Imagina!">Imagina!</span>
+                <button id="toggleDenadaBtn">See the translations!</button>
+            </div>
+
+            <!-- Student Answer Section -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="Someone thanks you for a small favor. How would you respond informally?" data-lang-pt="Alguém te agradece por um pequeno favor. Como você responderia informalmente?"></span>
+                    <button class="play-audio-button" data-text-en="Someone thanks you for a small favor. How would you respond informally?" data-text-pt="Alguém te agradece por um pequeno favor. Como você responderia informalmente?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for De nada informal">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+
+                <div class="exercise-prompt" style="margin-top: 20px;">
+                    <span data-lang-en="How would you respond formally if a client thanked you?" data-lang-pt="Como você responderia formalmente se um cliente te agradecesse?"></span>
+                    <button class="play-audio-button" data-text-en="How would you respond formally if a client thanked you?" data-text-pt="Como você responderia formalmente se um cliente te agradecesse?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for De nada formal">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+
+            <!-- Special Explanation Box for "Friend" and "Thank you" nuances -->
+            <div class="conversation-type-box">
+                <p data-lang-en="<h4>⚠️ **Important Note on 'Friend' and 'Thank You' variations:**</h4>
+                <br>
+                <strong>Overuse of 'Friend' by Brazilians:</strong> In English, 'friend' (<span class='highlight-expression'>'amigo/a'</span>) implies a personal, established relationship. Brazilians often use <span class='highlight-expression'>'amigo/a'</span> as a general term of address for strangers or casual acquaintances (e.g., to a waiter, shopkeeper, or someone whose name you don't know). This is **not common or natural in English**. Using 'friend' in such contexts can sound awkward, overly familiar, or even sarcastic.
+                <br><br>
+                Instead of 'friend', consider these alternatives:
+                <ul>
+                    <li>To get attention: <span class='highlight-expression'>'Excuse me,'</span> <span class='highlight-expression'>'Pardon me'</span></li>
+                    <li>For general address (if appropriate): <span class='highlight-expression'>'Sir,'</span> <span class='highlight-expression'>'Ma'am,'</span> (Senhor, Senhora)</li>
+                    <li>Informal terms among closer acquaintances (use with caution and only if you hear native speakers using them):
+                        <ul>
+                            <li><span class='highlight-expression'>'Mate'</span> (very common in British/Australian English for male friends/acquaintances)</li>
+                            <li><span class='highlight-expression'>'Buddy'</span> (common in American English for male friends/acquaintances)</li>
+                            <li><span class='highlight-expression'>'Pal'</span> (can be used for either gender, sometimes slightly condescending if not used carefully)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                <strong>Variations of 'Thank You':</strong>
+                <ul>
+                    <li><span class='highlight-expression'>'Thank you.'</span> / <span class='highlight-expression'>'Thanks.'</span>: These are expressions of gratitude, **not** responses to 'You're welcome'. They are used to *give* thanks. 'Thanks' is more informal.</li>
+                    <li><span class='highlight-expression'>'Thank you very much.'</span>: A standard, strong expression of gratitude. It's common and polite.</li>
+                    <li><span class='highlight-expression'>'Thank you very much indeed.'</span>: This is a more emphatic and formal way to express profound gratitude, often used in British English. It adds an extra layer of sincerity or confirmation. Use it when you are genuinely very grateful or want to emphasize your thanks in a formal setting.</li>
+                </ul>"
+                   data-lang-pt="<h4>⚠️ **Observação Importante sobre 'Friend' e Variações de 'Obrigado':**</h4>
+                   <br>
+                   <strong>Uso excessivo de 'Friend' por Brasileiros:</strong> Em inglês, 'friend' (<span class='highlight-expression'>'amigo/a'</span>) implica um relacionamento pessoal e estabelecido. Brasileiros frequentemente usam <span class='highlight-expression'>'amigo/a'</span> como um termo geral de tratamento para estranhos ou conhecidos casuais (ex: para um garçom, lojista, ou alguém cujo nome você não sabe). Isso **não é comum ou natural em inglês**. Usar 'friend' nesses contextos pode soar estranho, excessivamente familiar ou até sarcástico.
+                   <br><br>
+                   Em vez de 'friend', considere estas alternativas:
+                   <ul>
+                       <li>Para chamar atenção: <span class='highlight-expression'>'Com licença,'</span> <span class='highlight-expression'>'Perdão'</span></li>
+                       <li>Para tratamento geral (se apropriado): <span class='highlight-expression'>'Senhor,'</span> <span class='highlight-expression'>'Senhora,'</span></li>
+                       <li>Termos informais entre conhecidos mais próximos (use com cautela e apenas se você ouvir falantes nativos usando-os):
+                           <ul>
+                               <li><span class='highlight-expression'>'Mate'</span> (muito comum no inglês britânico/australiano para amigos/conhecidos do sexo masculino)</li>
+                               <li><span class='highlight-expression'>'Buddy'</span> (comum no inglês americano para amigos/conhecidos do sexo masculino)</li>
+                               <li><span class='highlight-expression'>'Pal'</span> (pode ser usado para ambos os sexos, às vezes ligeiramente condescendente se não usado com cuidado)</li>
+                           </ul>
+                       </li>
+                   </ul>
+                   <br>
+                   <strong>Variações de 'Obrigado':</strong>
+                   <ul>
+                       <li><span class='highlight-expression'>'Thank you.'</span> / <span class='highlight-expression'>'Thanks.'</span>: Estas são expressões de gratidão, **não** respostas para 'De nada'. Elas são usadas para *agradecer*. 'Thanks' é mais informal.</li>
+                       <li><span class='highlight-expression'>'Thank you very much.'</span>: Uma expressão padrão e forte de gratidão. É comum e educada.</li>
+                       <li><span class='highlight-expression'>'Thank you very much indeed.'</span>: Esta é uma forma mais enfática e formal de expressar gratidão profunda, frequentemente usada no inglês britânico. Adiciona uma camada extra de sinceridade ou confirmação. Use-a quando você está genuinamente muito grato ou quer enfatizar seus agradecimentos em um ambiente formal.</li>
+                   </ul>">
+                    <!-- Content populated by JS -->
+                </p>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Expression 10: "Igualmente" -->
+        <section id="expression10" class="content-card">
+            <h2 class="section-title">Expression 10: <span class="highlight-expression">"Igualmente"</span></h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Meaning: Used to reciprocate a greeting, compliment, or wish. It means 'the same to you' or 'likewise'.
+                 <br><br>
+                 <strong>English Equivalents & Usage:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Likewise.'</span>: A common and concise way to say 'the same to you'. It's versatile and can be used in most situations.</li>
+                     <li><span class='highlight-expression'>'Same to you.'</span>: Informal, direct, and very common. Used to return a positive sentiment.</li>
+                 </ul>
+                 <br>
+                 <strong>Teacher Daby's Tip for You:</strong> 'Igualmente' is a very useful word in Portuguese to quickly return a sentiment. In English, 'likewise' is slightly more formal but still widely used, while 'same to you' is perfect for casual settings.
+                 <br><br>
+                 <strong>You can use:</strong>
+                 <ul>
+                     <li>When someone says 'Nice to meet you,' you can respond with 'Likewise.' or 'Same to you.'</li>
+                     <li>If someone wishes you 'Have a great day!', you can reply 'Same to you!' or 'Likewise!'</li>
+                     <li>After someone compliments you, you can say 'Likewise!' to return the compliment.</li>
+                 </ul>"
+                 data-lang-pt="Significado: Usado para retribuir uma saudação, elogio ou desejo. Significa 'o mesmo para você' ou 'da mesma forma'.
+                 <br><br>
+                 <strong>Equivalentes em Inglês e Uso:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Likewise.'</span>: Uma forma comum e concisa de dizer 'o mesmo para você'. É versátil e pode ser usada na maioria das situações.</li>
+                     <li><span class='highlight-expression'>'Same to you.'</span>: Informal, direto e muito comum. Usado para retribuir um sentimento positivo.</li>
+                 </ul>
+                 <br>
+                 <strong>Dica da Teacher Daby para Você:</strong> 'Igualmente' é uma palavra muito útil em português para retribuir rapidamente um sentimento. Em inglês, 'likewise' é um pouco mais formal, mas ainda amplamente usado, enquanto 'same to you' é perfeito para ambientes casuais.
+                 <br><br>
+                 <strong>Estrutura Gramatical:</strong>
+                 <ul>
+                     <li><span class='highlight-expression'>'Likewise.'</span> = `Likewise.` (Palavra única)</li>
+                     <li><span class='highlight-expression'>'Same to you.'</span> = `Same + to + you.` (Estrutura fixa)</li>
+                 </ul>
+                 <br>
+                 <strong>Você pode usar:</strong>
+                 <ul>
+                     <li>Quando alguém diz 'Prazer em conhecê-lo', você pode responder com 'Likewise.' ou 'Same to you.'</li>
+                     <li>Se alguém te deseja 'Tenha um ótimo dia!', você pode responder 'Same to you!' ou 'Likewise!'</li>
+                     <li>Depois que alguém te elogia, você pode dizer 'Likewise!' para retribuir o elogio.</li>
+                 </ul>">
+                <!-- Default content will be set by JS on load -->
+            </div>
+
+            <!-- New: "Igualmente" visual effect box -->
+            <div class="hi-there-effect-box">
+                <span id="igualmentePtWord" class="display-word active" data-lang-en="Likewise." data-lang-pt="Igualmente.">Igualmente.</span>
+                <span id="sameToYouEnWord" class="display-word" data-lang-en="Same to you." data-lang-pt="O mesmo para você.">O mesmo para você.</span>
+                <button id="toggleIgualmenteBtn">See the translations!</button>
+            </div>
+
+            <!-- NEW: Have a nice... / Happy Day! section -->
+            <div class="conversation-type-box" style="margin-top: 30px;">
+                <p data-lang-en="<h4>✨ **Wishing Others Well: 'Have a nice...' & 'Happy Day!'** ✨</h4>
+                These phrases are commonly used to express good wishes for someone's immediate future or a specific day.
+                <br><br>
+                <strong>'Have a nice [time period/event]!'</strong>
+                <ul>
+                    <li><span class='highlight-expression'>'Have a nice weekend!'</span> / <span class='highlight-expression'>'Have a great weekend!'</span></li>
+                    <li><span class='highlight-expression'>'Have a nice day!'</span> / <span class='highlight-expression'>'Have a great day!'</span></li>
+                    <li><span class='highlight-expression'>'Have a nice week!'</span> / <span class='highlight-expression'>'Have a great week!'</span></li>
+                    <li><span class='highlight-expression'>'Have a nice one!'</span>: A very informal and versatile way to say 'Have a nice day/weekend/time'.</li>
+                </ul>
+                You can also add <span class='highlight-expression'>'ahead'</span> to emphasize the future:
+                <ul>
+                    <li><span class='highlight-expression'>'Have a great weekend ahead!'</span></li>
+                    <li><span class='highlight-expression'>'Have a productive week ahead!'</span></li>
+                </ul>
+                <br>
+                <strong>'Happy [Day of the Week]!'</strong>
+                <ul>
+                    <li><span class='highlight-expression'>'Happy Friday!'</span>: Very common, especially at the end of the work week.</li>
+                    <li><span class='highlight-expression'>'TGIF!'</span>: Stands for 'Thank God It's Friday!' - A very popular informal expression of relief and excitement for the weekend.</li>
+                    <li><span class='highlight-expression'>'Happy Monday!'</span> / <span class='highlight-expression'>'Happy Tuesday!'</span>: Can be used for any day, but 'Happy Friday' and 'Happy Monday/Tuesday' are most common.</li>
+                </ul>
+                These are great for casual goodbyes or quick well-wishes."
+                   data-lang-pt="<h4>✨ **Desejando o Bem aos Outros: 'Tenha um bom...' e 'Feliz Dia!'** ✨</h4>
+                   Essas frases são comumente usadas para expressar bons desejos para o futuro imediato de alguém ou para um dia específico.
+                   <br><br>
+                   <strong>'Tenha um bom [período/evento]!'</strong>
+                   <ul>
+                       <li><span class='highlight-expression'>'Tenha um bom fim de semana!'</span> / <span class='highlight-expression'>'Tenha um ótimo fim de semana!'</span></li>
+                       <li><span class='highlight-expression'>'Tenha um bom dia!'</span> / <span class='highlight-expression'>'Tenha um ótimo dia!'</span></li>
+                       <li><span class='highlight-expression'>'Tenha uma boa semana!'</span> / <span class='highlight-expression'>'Tenha uma ótima semana!'</span></li>
+                       <li><span class='highlight-expression'>'Tenha um bom dia/fim de semana!'</span> (equivalente a 'Have a nice one!'): Uma forma muito informal e versátil de desejar 'Tenha um bom dia/fim de semana/momento'.</li>
+                   </ul>
+                   Você também pode adicionar <span class='highlight-expression'>'pela frente'</span> para enfatizar o futuro:
+                   <ul>
+                       <li><span class='highlight-expression'>'Tenha um ótimo fim de semana pela frente!'</span></li>
+                       <li><span class='highlight-expression'>'Tenha uma semana produtiva pela frente!'</span></li>
+                   </ul>
+                   <br>
+                   <strong>'Feliz [Dia da Semana]!'</strong>
+                   <ul>
+                       <li><span class='highlight-expression'>'Feliz Sexta-feira!'</span>: Muito comum, especialmente no final da semana de trabalho.</li>
+                       <li><span class='highlight-expression'>'TGIF!'</span>: Significa 'Graças a Deus é Sexta-feira!' - Uma expressão informal muito popular de alívio e empolgação para o fim de semana.</li>
+                       <li><span class='highlight-expression'>'Feliz Segunda-feira!'</span> / <span class='highlight-expression'>'Feliz Terça-feira!'</span>: Pode ser usado para qualquer dia, mas 'Feliz Sexta-feira' e 'Feliz Segunda-feira/Terça-feira' são os mais comuns.</li>
+                   </ul>
+                   São ótimas para despedidas casuais ou votos rápidos de bem-estar.">
+                    <!-- Content populated by JS -->
+                </p>
+                <div class="hi-there-effect-box">
+                    <span id="haveNiceWeekend" class="display-word active" data-lang-en="Have a nice weekend!" data-lang-pt="Tenha um bom fim de semana!">Have a nice weekend!</span>
+                    <span id="haveNiceDay" class="display-word" data-lang-en="Have a nice day!" data-lang-pt="Tenha um bom dia!">Tenha um bom dia!</span>
+                    <span id="haveNiceWeek" class="display-word" data-lang-en="Have a nice week!" data-lang-pt="Tenha uma boa semana!">Tenha uma boa semana!</span>
+                    <span id="haveNiceOne" class="display-word" data-lang-en="Have a nice one!" data-lang-pt="Tenha um bom dia/fim de semana!">Tenha um bom dia/fim de semana!</span>
+                    <span id="happyFriday" class="display-word" data-lang-en="Happy Friday!" data-lang-pt="Feliz Sexta-feira!">Happy Friday!</span>
+                    <span id="tgif" class="display-word" data-lang-en="TGIF!" data-lang-pt="TGIF!">TGIF!</span>
+                    <span id="happyMonday" class="display-word" data-lang-en="Happy Monday!" data-lang-pt="Feliz Segunda-feira!">Happy Monday!</span>
+                    <span id="happyTuesday" class="display-word" data-lang-en="Happy Tuesday!" data-lang-pt="Feliz Terça-feira!">Happy Tuesday!</span>
+                    <button id="toggleGreetingsBtn">See more greetings!</button>
+                </div>
+            </div>
+
+            <!-- NEW: TGIF / Sextou animated box -->
+            <div class="conversation-type-box" style="margin-top: 30px;">
+                <p data-lang-en="<h4>🎉 **TGIF! & 'Sextou!' - Celebrating the End of the Week** 🎉</h4>
+                These expressions are specifically used to celebrate the arrival of Friday and the upcoming weekend.
+                <br><br>
+                <strong>'TGIF!'</strong>
+                <ul>
+                    <li>Stands for <span class='highlight-expression'>'Thank God It's Friday!'</span>.</li>
+                    <li>A very popular informal expression of relief and excitement for the weekend.</li>
+                    <li>Used widely in casual settings among friends, family, and colleagues.</li>
+                </ul>
+                <br>
+                <strong>'Have a nice one!'</strong>
+                <ul>
+                    <li>A versatile, informal way to wish someone well.</li>
+                    <li>It can mean <span class='highlight-expression'>'Have a nice day,' 'Have a nice weekend,'</span> or simply <span class='highlight-expression'>'Have a nice time.'</span></li>
+                    <li>Often used as a quick, friendly goodbye.</li>
+                </ul>
+                <br>
+                <strong>Brazilian Portuguese Equivalent: 'Sextou!'</strong>
+                <ul>
+                    <li>A very popular and informal Brazilian Portuguese slang.</li>
+                    <li>It literally means <span class='highlight-expression'>'It Friyay-ed!'</span> or <span class='highlight-expression'>'Friday-ed!'</span>.</li>
+                    <li>Used to express excitement and relief that Friday has arrived and the weekend is starting.</li>
+                    <li>Equivalent to the feeling and usage of 'TGIF!' in English.</li>
+                </ul>"
+                   data-lang-pt="<h4>🎉 **TGIF! e 'Sextou!' - Celebrando o Fim da Semana** 🎉</h4>
+                   Essas expressões são usadas especificamente para celebrar a chegada da sexta-feira e o fim de semana que se aproxima.
+                   <br><br>
+                   <strong>'TGIF!'</strong>
+                   <ul>
+                       <li>Significa <span class='highlight-expression'>'Graças a Deus é Sexta-feira!'</span>.</li>
+                       <li>Uma expressão informal muito popular de alívio e empolgação para o fim de semana.</li>
+                       <li>Amplamente usada em ambientes casuais entre amigos, família e colegas.</li>
+                   </ul>
+                   <br>
+                   <strong>'Have a nice one!'</strong>
+                   <ul>
+                       <li>Uma forma versátil e informal de desejar o bem a alguém.</li>
+                       <li>Pode significar <span class='highlight-expression'>'Tenha um bom dia,' 'Tenha um bom fim de semana,'</span> ou simplesmente <span class='highlight-expression'>'Tenha um bom momento.'</span></li>
+                       <li>Frequentemente usada como uma despedida rápida e amigável.</li>
+                   </ul>
+                   <br>
+                   <strong>Equivalente em Português do Brasil: 'Sextou!'</strong>
+                   <ul>
+                       <li>Uma gíria brasileira muito popular e informal.</li>
+                       <li>Literalmente significa <span class='highlight-expression'>'Sextou!'</span> (como se a sexta-feira tivesse virado um verbo).</li>
+                       <li>Usada para expressar empolgação e alívio de que a sexta-feira chegou e o fim de semana está começando.</li>
+                       <li>Equivalente ao sentimento e uso de 'TGIF!' em inglês.</li>
+                   </ul>">
+                    <!-- Content populated by JS -->
+                </p>
+                <div class="hi-there-effect-box">
+                    <span id="tgifAnimated" class="display-word active" data-lang-en="TGIF!" data-lang-pt="TGIF!">TGIF!</span>
+                    <span id="haveNiceOneAnimated" class="display-word" data-lang-en="Have a nice one!" data-lang-pt="Tenha um bom dia/fim de semana!">Have a nice one!</span>
+                    <span id="sextouAnimated" class="display-word" data-lang-en="Sextou!" data-lang-pt="Sextou!">Sextou!</span>
+                    <button id="toggleTgifSextouBtn">See the expressions!</button>
+                </div>
+            </div>
+
+
+            <!-- Student Answer Section (remains the same) -->
+            <div class="exercise-container">
+                <h3>Your Turn!</h3>
+                <div class="exercise-prompt">
+                    <span data-lang-en="Someone says 'Have a good weekend!'. How would you respond using an equivalent of 'Igualmente'?" data-lang-pt="Alguém diz 'Tenha um bom fim de semana!'. Como você responderia usando um equivalente de 'Igualmente'?"></span>
+                    <button class="play-audio-button" data-text-en="Someone says 'Have a good weekend!'. How would you respond using an equivalent of 'Igualmente'?" data-text-pt="Alguém diz 'Tenha um bom fim de semana!'. Como você responderia usando um equivalente de 'Igualmente'?">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" placeholder="Type your answer here..." aria-label="Your answer for Igualmente">
+                <button class="exercise-button check-answer-btn">Check Answer</button>
+                <div class="feedback-message"></div>
+            </div>
+        </section>
+
+
+        <!-- New Section: Quick References -->
+        <section id="quick-references" class="content-card quick-references">
+            <h2 class="section-title">Quick References</h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <ul class="content-text">
+                <li data-lang-en="**In Meetings:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Let's kick off'</span>: To start a meeting or a project.</li>
+                        <li><span class='highlight-expression'>'To circle back'</span>: To revisit a topic or a person later.</li>
+                        <li><span class='highlight-expression'>'Touch base'</span>: To briefly connect with someone to discuss something.</li>
+                        <li><span class='highlight-expression'>'On the same page'</span>: To be in agreement or have the same understanding.</li>
+                        <li><span class='highlight-expression'>'Takeaways'</span>: Key points or conclusions from a discussion.</li>
+                    </ul>"
+                    data-lang-pt="**Em Reuniões:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Vamos começar'</span>: Para iniciar uma reunião ou um projeto.</li>
+                        <li><span class='highlight-expression'>'Para retomar'</span>: Para revisitar um tópico ou uma pessoa mais tarde.</li>
+                        <li><span class='highlight-expression'>'Fazer um contato rápido'</span>: Para se conectar brevemente com alguém para discutir algo.</li>
+                        <li><span class='highlight-expression'>'Na mesma página'</span>: Estar em acordo ou ter o mesmo entendimento.</li>
+                        <li><span class='highlight-expression'>'Pontos-chave'</span>: Pontos principais ou conclusões de uma discussão.</li>
+                    </ul>">
+                </li>
+                <li data-lang-en="**In Emails:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Hope this email finds you well'</span>: A formal and polite opening greeting.</li>
+                        <li><span class='highlight-expression'>'Looking forward to your reply'</span>: A polite way to say you await their response.</li>
+                        <li><span class='highlight-expression'>'Best regards'</span> / <span class='highlight-expression'>'Kind regards'</span>: Formal and common closing remarks.</li>
+                        <li><span class='highlight-expression'>'Please find attached'</span>: Used when attaching documents.</li>
+                        <li><span class='highlight-expression'>'As per our discussion'</span>: Referring to a previous conversation.</li>
+                    </ul>"
+                    data-lang-pt="**Em E-mails:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Espero que este e-mail o encontre bem'</span>: Uma saudação de abertura formal e educada.</li>
+                        <li><span class='highlight-expression'>'Aguardo sua resposta'</span>: Uma forma educada de dizer que você espera a resposta deles.</li>
+                        <li><span class='highlight-expression'>'Atenciosamente'</span> / <span class='highlight-expression'>'Cordialmente'</span>: Fechamentos formais e comuns.</li>
+                        <li><span class='highlight-expression'>'Em anexo'</span>: Usado ao anexar documentos.</li>
+                        <li><span class='highlight-expression'>'Conforme nossa discussão'</span>: Referindo-se a uma conversa anterior.</li>
+                    </ul>">
+                </li>
+                <li data-lang-en="**In Chat (Teams, Slack, Google Chat):**
+                    <ul>
+                        <li><span class='highlight-expression'>'FYI'</span>: For Your Information.</li>
+                        <li><span class='highlight-expression'>'ASAP'</span>: As Soon As Possible.</li>
+                        <li><span class='highlight-expression'>'BRB'</span>: Be Right Back.</li>
+                        <li><span class='highlight-expression'>'GTG'</span>: Got To Go.</li>
+                        <li><span class='highlight-expression'>'IMO'</span>: In My Opinion.</li>
+                        <li><span class='highlight-expression'>'TL;DR'</span>: Too Long; Didn't Read (for summaries).</li>
+                    </ul>"
+                    data-lang-pt="**No Chat (Teams, Slack, Google Chat):**
+                    <ul>
+                        <li><span class='highlight-expression'>'FYI'</span>: Para Sua Informação.</li>
+                        <li><span class='highlight-expression'>'ASAP'</span>: O Mais Rápido Possível.</li>
+                        <li><span class='highlight-expression'>'BRB'</span>: Volto Já.</li>
+                        <li><span class='highlight-expression'>'GTG'</span>: Tenho que Ir.</li>
+                        <li><span class='highlight-expression'>'IMO'</span>: Na Minha Opinião.</li>
+                        <li><span class='highlight-expression'>'TL;DR'</span>: Muito Longo; Não Li (para resumos).</li>
+                    </ul>">
+                </li>
+                <li data-lang-en="**In Daily Conversations:**
+                    <ul>
+                        <li><span class='highlight-expression'>'How's it going?'</span>: A common informal greeting.</li>
+                        <li><span class='highlight-expression'>'What's up?'</span>: A very informal way to ask 'how are you?'.</li>
+                        <li><span class='highlight-expression'>'Long time no see!'</span>: Used when you haven't seen someone in a while.</li>
+                        <li><span class='highlight-expression'>'Catch you later'</span>: Informal way to say goodbye.</li>
+                        <li><span class='highlight-expression'>'No worries'</span>: Means 'no problem' or 'it's okay'.</li>
+                    </ul>"
+                    data-lang-pt="**Em Conversas Diárias:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Como vai?'</span>: Uma saudação informal comum.</li>
+                        <li><span class='highlight-expression'>'E aí?'</span>: Uma forma muito informal de perguntar 'como você está?'.</li>
+                        <li><span class='highlight-expression'>'Quanto tempo!'</span>: Usado quando você não vê alguém há um tempo.</li>
+                        <li><span class='highlight-expression'>'Te vejo mais tarde'</span>: Forma informal de dizer adeus.</li>
+                        <li><span class='highlight-expression'>'Sem problemas'</span>: Significa 'tudo bem' ou 'não se preocupe'.</li>
+                    </ul>">
+                </li>
+                <li data-lang-en="**When Presenting:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Good morning/afternoon everyone'</span>: Standard opening greeting.</li>
+                        <li><span class='highlight-expression'>'Thank you for your attention'</span>: Polite closing remark.</li>
+                        <li><span class='highlight-expression'>'Any questions?'</span>: To open the floor for Q&A.</li>
+                        <li><span class='highlight-expression'>'To summarize'</span>: To give a brief overview.</li>
+                        <li><span class='highlight-expression'>'In conclusion'</span>: To wrap up your presentation.</li>
+                    </ul>"
+                    data-lang-pt="**Ao Apresentar:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Bom dia/boa tarde a todos'</span>: Saudação de abertura padrão.</li>
+                        <li><span class='highlight-expression'>'Obrigado pela atenção'</span>: Observação de encerramento educada.</li>
+                        <li><span class='highlight-expression'>'Alguma pergunta?'</span>: Para abrir para perguntas e respostas.</li>
+                        <li><span class='highlight-expression'>'Para resumir'</span>: Para dar uma breve visão geral.</li>
+                        <li><span class='highlight-expression'>'Em conclusão'</span>: Para finalizar sua apresentação.</li>
+                    </ul>">
+                </li>
+                <li data-lang-en="**Asking for Clarification:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Could you elaborate on that?'</span>: Ask for more details.</li>
+                        <li><span class='highlight-expression'>'Could you explain that again?'</span>: Request a re-explanation.</li>
+                        <li><span class='highlight-expression'>'What do you mean by...?'</span>: Seek specific clarification.</li>
+                        <li><span class='highlight-expression'>'Could you be more specific?'</span>: Ask for precise details.</li>
+                    </ul>"
+                    data-lang-pt="**Pedindo Esclarecimento:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Você poderia detalhar isso?'</span>: Pedir mais detalhes.</li>
+                        <li><span class='highlight-expression'>'Você poderia explicar isso novamente?'</span>: Solicitar uma reexplicação.</li>
+                        <li><span class='highlight-expression'>'O que você quer dizer com...?'</span>: Buscar esclarecimento específico.</li>
+                        <li><span class='highlight-expression'>'Você poderia ser mais específico?'</span>: Pedir detalhes precisos.</li>
+                    </ul>">
+                </li>
+                <li data-lang-en="**Expressing Agreement/Disagreement:**
+                    <ul>
+                        <li><span class='highlight-expression'>'I agree with you.'</span>: Simple agreement.</li>
+                        <li><span class='highlight-expression'>'That's a good point.'</span>: Acknowledge a valid argument.</li>
+                        <li><span class='highlight-expression'>'I see your point, but...'</span>: Partial agreement followed by a counterpoint.</li>
+                        <li><span class='highlight-expression'>'I'm afraid I don't agree.'</span>: Polite disagreement.</li>
+                        <li><span class='highlight-expression'>'Absolutely!'</span> / <span class='highlight-expression'>'Exactly!'</span>: Strong agreement.</li>
+                    </ul>"
+                    data-lang-pt="**Expressando Acordo/Desacordo:**
+                    <ul>
+                        <li><span class='highlight-expression'>'Concordo com você.'</span>: Acordo simples.</li>
+                        <li><span class='highlight-expression'>'É um bom ponto.'</span>: Reconhecer um argumento válido.</li>
+                        <li><span class='highlight-expression'>'Entendo seu ponto, mas...'</span>: Acordo parcial seguido de um contraponto.</li>
+                        <li><span class='highlight-expression'>'Receio não concordar.'</span>: Discordância educada.</li>
+                        <li><span class='highlight-expression'>'Com certeza!'</span> / <span class='highlight-expression'>'Exatamente!'</span>: Forte acordo.</li>
+                    </ul>">
+                </li>
+            </ul>
+        </section>
+
+        <!-- New Section: Voice Pronunciation Checkpoint -->
+        <section id="voice-checkpoint-exercise" class="content-card">
+            <h2 class="section-title">Voice Pronunciation Checkpoint</h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="Listen to the pronunciation of <span class='highlight-expression'>'Hi, there!'</span> and then type how you would pronounce it. This helps you practice your auditory and phonetic skills."
+                 data-lang-pt="Ouça a pronúncia de <span class='highlight-expression'>'Hi, there!'</span> e depois digite como você a pronunciaria. Isso ajuda a praticar suas habilidades auditivas e fonéticas.">
+                <!-- Default content will be set by JS on load -->
+            </div>
+            <div class="exercise-container">
+                <div class="exercise-prompt">
+                    <span data-lang-en="Pronounce: <span class='highlight-expression'>'Hi, there!'</span>" data-lang-pt="Pronuncie: <span class='highlight-expression'>'Hi, there!'</span>">Pronounce: <span class='highlight-expression'>'Hi, there!'</span></span>
+                    <button class="play-audio-button" data-text-en="Hi, there!" data-text-pt="Hi, there!">Play Audio</button>
+                </div>
+                <input type="text" class="exercise-input" id="pronunciationInput" placeholder="Type your pronunciation here (e.g., 'hai dher')..." aria-label="Your pronunciation for Hi, there!">
+                <button class="exercise-button" onclick="checkPronunciationCheckpoint()">Check Pronunciation</button>
+                <div class="feedback-message" id="pronunciationFeedback"></div>
+                <p style="font-size: 0.9em; color: #aaa; margin-top: 15px;"
+                   data-lang-en="Note: This exercise focuses on self-assessment. Actual voice recording and analysis are not supported in this environment."
+                   data-lang-pt="Nota: Este exercício foca na autoavaliação. Gravação e análise de voz reais não são suportadas neste ambiente."></p>
+            </div>
+        </section>
+
+        <!-- Section 8: About Teacher Daby -->
+        <section id="about" class="content-card">
+            <h2 class="section-title">About Teacher Daby</h2>
+            <div class="lang-buttons">
+                <button data-lang="en">English</button>
+                <button data-lang="pt">Português</button>
+            </div>
+            <div class="content-text"
+                 data-lang-en="This interactive learning platform was proudly created by Teacher Daby @2025. My mission is to empower language learners worldwide through innovative and engaging educational tools. Thank you for visiting!"
+                 data-lang-pt="Esta plataforma de aprendizado interativa foi orgulhosamente criada pela Teacher Daby @2025. Minha missão é capacitar alunos de idiomas em todo o mundo por meio de ferramentas educacionais inovadoras e envolventes. Obrigado pela visita!">
+                <!-- Default content will be set by JS on load -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Teacher Daby. All rights reserved.</p>
+    </footer>
+
+    <!-- Library for PDF export (html2pdf.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const synth = window.speechSynthesis; // Web Speech API SpeechSynthesis object
+            let currentLang = 'en'; // Track current language for audio
+
+            // --- Utility function to speak text ---
+            function speakText(text, lang) {
+                if (synth.speaking) {
+                    synth.cancel(); // Stop any ongoing speech
+                }
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang; // Set language for speech
+                synth.speak(utterance);
+            }
+
+            // --- Language Switching Logic ---
+            document.querySelectorAll('.lang-buttons button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const lang = event.target.dataset.lang;
+                    currentLang = lang; // Update current language
+                    const section = event.target.closest('.content-card');
+                    const contentText = section.querySelector('.content-text');
+                    const sectionTitle = section.querySelector('.section-title'); // For the section title
+                    const conversationTypeBoxes = section.querySelectorAll('.conversation-type-box p'); // For all conversation boxes
+
+                    // Select all exercise prompts within the section
+                    const exercisePrompts = section.querySelectorAll('.exercise-prompt span');
+                    const playAudioButtons = section.querySelectorAll('.play-audio-button');
+                    const exerciseInputs = section.querySelectorAll('.exercise-input');
+
+                    // Remove 'active' class from all buttons in the current section
+                    section.querySelectorAll('.lang-buttons button').forEach(btn => btn.classList.remove('active'));
+                    // Add 'active' class to the clicked button
+                    event.target.classList.add('active');
+
+                    // Update section title if it exists
+                    if (sectionTitle) {
+                        const enTitle = sectionTitle.dataset.langEn;
+                        const ptTitle = sectionTitle.dataset.langPt;
+                        if (lang === 'en' && enTitle) {
+                            sectionTitle.innerHTML = enTitle; // Use innerHTML to preserve highlight spans
+                        } else if (lang === 'pt' && ptTitle) {
+                            sectionTitle.innerHTML = ptTitle; // Use innerHTML to preserve highlight spans
+                        }
+                    }
+
+                    // Update content for main text
+                    // Check if contentText is a UL (for Quick References) or a DIV (for expressions)
+                    if (section.id === 'quick-references' || section.id === 'expression9' || section.id === 'expression10') { // Specific handling for Quick References and Expression 9/10's special box
+                        const ulElements = contentText.querySelectorAll('ul');
+                        if (ulElements.length > 0) {
+                            ulElements.forEach(ul => {
+                                ul.querySelectorAll('li').forEach(li => {
+                                    const enContent = li.dataset.langEn;
+                                    const ptContent = li.dataset.langPt;
+                                    if (lang === 'en' && enContent) {
+                                        li.innerHTML = enContent;
+                                    } else if (lang === 'pt' && ptContent) {
+                                        li.innerHTML = ptContent;
+                                    }
+                                });
+                            });
+                        } else { // For the main paragraph text within content-text
+                            const enContent = contentText.dataset.langEn;
+                            const ptContent = contentText.dataset.langPt;
+                            if (lang === 'en') {
+                                contentText.innerHTML = enContent;
+                            } else if (lang === 'pt') {
+                                contentText.innerHTML = ptContent;
+                            }
+                        }
+                    } else {
+                        const enContent = contentText.dataset.langEn;
+                        const ptContent = contentText.dataset.langPt;
+                        if (lang === 'en') {
+                            contentText.innerHTML = enContent; // Use innerHTML to preserve <br> and <strong> and highlight spans
+                        } else if (lang === 'pt') {
+                            contentText.innerHTML = ptContent; // Use innerHTML to preserve <br> and <strong> and highlight spans
+                        }
+                    }
+
+                    // Update content for exercise prompts and play audio buttons
+                    exercisePrompts.forEach(promptSpan => {
+                        const enPrompt = promptSpan.dataset.langEn;
+                        const ptPrompt = promptSpan.dataset.langPt;
+                        if (lang === 'en' && enPrompt) {
+                            promptSpan.innerHTML = enPrompt;
+                        } else if (lang === 'pt' && ptPrompt) {
+                            promptSpan.innerHTML = ptPrompt;
+                        }
+                    });
+
+                    playAudioButtons.forEach(button => {
+                        const textEn = button.dataset.textEn;
+                        const textPt = button.dataset.textPt;
+                        if (lang === 'en' && textEn) {
+                            button.dataset.text = textEn;
+                        } else if (lang === 'pt' && textPt) {
+                            button.dataset.text = textPt;
+                        }
+                    });
+
+                    // Update content for the note in voice checkpoint if it exists
+                    const noteParagraph = section.querySelector('.exercise-container p');
+                    if (noteParagraph) {
+                        const enNote = noteParagraph.dataset.langEn;
+                        const ptNote = noteParagraph.dataset.langPt;
+                        if (lang === 'en') {
+                            noteParagraph.innerHTML = enNote;
+                        } else if (lang === 'pt') {
+                            noteParagraph.innerHTML = ptNote;
+                        }
+                    }
+
+                    // Update content for ALL conversation type boxes
+                    conversationTypeBoxes.forEach(pElement => {
+                        const enContent = pElement.dataset.langEn;
+                        const ptContent = pElement.dataset.langPt;
+                        if (lang === 'en') {
+                            pElement.innerHTML = enContent;
+                        } else if (lang === 'pt') {
+                            pElement.innerHTML = ptContent;
+                        }
+                    });
+
+
+                    // Update content for the "How are you doing?" effect box
+                    const howDoingWord = document.getElementById('howDoingWord');
+                    const howsItGoingWord = document.getElementById('howsItGoingWord');
+                    if (howDoingWord && howsItGoingWord) {
+                        if (lang === 'en') {
+                            howDoingWord.textContent = howDoingWord.dataset.langEn;
+                            howsItGoingWord.textContent = howsItGoingWord.dataset.langEn;
+                        } else if (lang === 'pt') {
+                            howDoingWord.textContent = howDoingWord.dataset.langPt;
+                            howsItGoingWord.textContent = howsItGoingWord.dataset.langPt;
+                        }
+                    }
+
+                    // Update content for the "Deixa que eu te apresento o Daby" effect box
+                    const dabyPtWord = document.getElementById('dabyPtWord');
+                    const dabyEnWord = document.getElementById('dabyEnWord');
+                    if (dabyPtWord && dabyEnWord) {
+                        if (lang === 'en') {
+                            dabyPtWord.textContent = dabyPtWord.dataset.langEn;
+                            dabyEnWord.textContent = dabyEnWord.dataset.langEn;
+                        } else if (lang === 'pt') {
+                            dabyPtWord.textContent = dabyPtWord.dataset.langPt;
+                            dabyEnWord.textContent = dabyEnWord.dataset.langPt;
+                        }
+                    }
+
+                    // Update content for the "Prazer em conhecê-lo" effect box
+                    const pleasedWords = [
+                        document.getElementById('pleasedPtWord'),
+                        document.getElementById('pleasureMinePtWord'),
+                        document.getElementById('itWasPleasurePtWord')
+                    ];
+                    pleasedWords.forEach(wordSpan => {
+                        if (wordSpan) { // Check if element exists
+                            if (lang === 'en') {
+                                wordSpan.textContent = wordSpan.dataset.langEn;
+                            } else if (lang === 'pt') {
+                                wordSpan.textContent = wordSpan.dataset.langPt;
+                            }
+                        }
+                    });
+
+                    // Update content for the "De nada" effect box
+                    const denadaWords = [
+                        document.getElementById('denadaPtWord'),
+                        document.getElementById('noprobPtWord'),
+                        document.getElementById('disponhaPtWord'),
+                        document.getElementById('imaginaPtWord')
+                    ];
+                    denadaWords.forEach(wordSpan => {
+                        if (wordSpan) { // Check if element exists
+                            if (lang === 'en') {
+                                wordSpan.textContent = wordSpan.dataset.langEn;
+                            } else if (lang === 'pt') {
+                                wordSpan.textContent = wordSpan.dataset.langPt;
+                            }
+                        }
+                    });
+
+                    // Update content for the "Igualmente" effect box
+                    const igualmenteWords = [
+                        document.getElementById('igualmentePtWord'),
+                        document.getElementById('sameToYouEnWord')
+                    ];
+                    igualmenteWords.forEach(wordSpan => {
+                        if (wordSpan) { // Check if element exists
+                            if (lang === 'en') {
+                                wordSpan.textContent = wordSpan.dataset.langEn;
+                            } else if (lang === 'pt') {
+                                wordSpan.textContent = wordSpan.dataset.langPt;
+                            }
+                        }
+                    });
+
+                    // Update content for the "Have a nice..." / "Happy Day!" effect box
+                    const greetingsWords = [
+                        document.getElementById('haveNiceWeekend'),
+                        document.getElementById('haveNiceDay'),
+                        document.getElementById('haveNiceWeek'),
+                        document.getElementById('haveNiceOne'),
+                        document.getElementById('happyFriday'),
+                        document.getElementById('tgif'),
+                        document.getElementById('happyMonday'),
+                        document.getElementById('happyTuesday')
+                    ];
+                    greetingsWords.forEach(wordSpan => {
+                        if (wordSpan) {
+                            if (lang === 'en') {
+                                wordSpan.textContent = wordSpan.dataset.langEn;
+                            } else if (lang === 'pt') {
+                                wordSpan.textContent = wordSpan.dataset.langPt;
+                            }
+                        }
+                    });
+
+                    // NEW: Update content for the "TGIF / Sextou" animated box
+                    const tgifSextouWords = [
+                        document.getElementById('tgifAnimated'),
+                        document.getElementById('haveNiceOneAnimated'),
+                        document.getElementById('sextouAnimated')
+                    ];
+                    tgifSextouWords.forEach(wordSpan => {
+                        if (wordSpan) {
+                            if (lang === 'en') {
+                                wordSpan.textContent = wordSpan.dataset.langEn;
+                            } else if (lang === 'pt') {
+                                wordSpan.textContent = wordSpan.dataset.langPt;
+                            }
+                        }
+                    });
+
+                });
+
+                // Initialize each section with English as the default active language
+                const section = button.closest('.content-card');
+                const englishButton = section.querySelector('.lang-buttons button[data-lang="en"]');
+                if (englishButton) {
+                    englishButton.click(); // Simulate a click to set initial language and active state
+                }
+            });
+
+            // --- "Impact to click in sequence" - Fade in sections on scroll ---
+            const contentCards = document.querySelectorAll('.content-card');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        // Also fade in all conversation type boxes within the section
+                        entry.target.querySelectorAll('.conversation-type-box').forEach(box => {
+                            box.classList.add('fade-in');
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            contentCards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // --- PDF Export Logic ---
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            exportPdfBtn.addEventListener('click', () => {
+                const element = document.querySelector('main.content-container');
+                const opt = {
+                    margin: 1,
+                    filename: 'LinguaFlix_TeacherDaby.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save();
+            });
+
+            // --- Play Audio Button Logic ---
+            document.querySelectorAll('.play-audio-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const textEn = event.target.dataset.textEn;
+                    const textPt = event.target.dataset.textPt;
+                    const section = event.target.closest('.content-card');
+                    const activeLangButton = section.querySelector('.lang-buttons button.active');
+                    const lang = activeLangButton ? activeLangButton.dataset.lang : 'en';
+
+                    // Use the `data-text` attribute set by the language switcher for speech
+                    const textToSpeak = button.dataset.text;
+                    if (textToSpeak) {
+                        speakText(textToSpeak, lang === 'en' ? 'en-US' : 'pt-BR');
+                    }
+                });
+            });
+
+            // --- General Check Answer Logic for Expression Sections ---
+            document.querySelectorAll('.content-card .check-answer-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const section = event.target.closest('.content-card');
+                    const input = event.target.previousElementSibling; // Get the input right before the clicked button
+                    const feedback = event.target.nextElementSibling; // Get the feedback message right after the clicked button
+                    const studentAnswer = input.value.trim();
+
+                    if (studentAnswer === '') {
+                        feedback.textContent = 'Please enter an answer.';
+                        feedback.className = 'feedback-message';
+                    } else {
+                        feedback.textContent = 'Thanks for your answer! Keep practicing!';
+                        feedback.className = 'feedback-message correct';
+                    }
+                });
+            });
+
+            // --- Voice Checkpoint Exercise Logic ---
+            window.checkPronunciationCheckpoint = function() {
+                const input = document.getElementById('pronunciationInput');
+                const feedback = document.getElementById('pronunciationFeedback');
+                const studentInput = input.value.trim().toLowerCase();
+
+                if (studentInput === '') {
+                    feedback.textContent = 'Please type your pronunciation.';
+                    feedback.className = 'feedback-message';
+                } else {
+                    // Since we cannot truly check pronunciation, provide encouraging feedback.
+                    feedback.textContent = 'Great effort! Keep practicing your pronunciation!';
+                    feedback.className = 'feedback-message correct'; // Use correct style for positive feedback
+                }
+            };
+
+            // "Igualmente" Effect Logic
+            const igualmenteWords = [
+                document.getElementById('igualmentePtWord'),
+                document.getElementById('sameToYouEnWord')
+            ].filter(Boolean); // Filter out nulls if elements aren't always present
+
+            const toggleIgualmenteBtn = document.getElementById('toggleIgualmenteBtn');
+            let currentIgualmenteIndex = 0;
+
+            if (toggleIgualmenteBtn && igualmenteWords.length > 0) {
+                toggleIgualmenteBtn.addEventListener('click', () => {
+                    // Deactivate current word
+                    igualmenteWords[currentIgualmenteIndex].classList.remove('active');
+
+                    // Move to next word, loop back if at end
+                    currentIgualmenteIndex = (currentIgualmenteIndex + 1) % igualmenteWords.length;
+
+                    // Activate next word
+                    setTimeout(() => {
+                        igualmenteWords[currentIgualmenteIndex].classList.add('active');
+                    }, 500); // Wait for fade out
+                });
+            }
+
+            // "Have a nice..." / "Happy Day!" Effect Logic
+            const greetingsWords = [
+                document.getElementById('haveNiceWeekend'),
+                document.getElementById('haveNiceDay'),
+                document.getElementById('haveNiceWeek'),
+                document.getElementById('haveNiceOne'),
+                document.getElementById('happyFriday'),
+                document.getElementById('tgif'),
+                document.getElementById('happyMonday'),
+                document.getElementById('happyTuesday')
+            ].filter(Boolean);
+
+            const toggleGreetingsBtn = document.getElementById('toggleGreetingsBtn');
+            let currentGreetingIndex = 0;
+
+            if (toggleGreetingsBtn && greetingsWords.length > 0) {
+                toggleGreetingsBtn.addEventListener('click', () => {
+                    // Deactivate current word
+                    greetingsWords[currentGreetingIndex].classList.remove('active');
+
+                    // Move to next word, loop back if at end
+                    currentGreetingIndex = (currentGreetingIndex + 1) % greetingsWords.length;
+
+                    // Activate next word
+                    setTimeout(() => {
+                        greetingsWords[currentGreetingIndex].classList.add('active');
+                    }, 500); // Wait for fade out
+                });
+            }
+
+            // NEW: TGIF / Sextou animated box logic
+            const tgifSextouWords = [
+                document.getElementById('tgifAnimated'),
+                document.getElementById('haveNiceOneAnimated'),
+                document.getElementById('sextouAnimated')
+            ].filter(Boolean);
+
+            const toggleTgifSextouBtn = document.getElementById('toggleTgifSextouBtn');
+            let currentTgifSextouIndex = 0;
+
+            if (toggleTgifSextouBtn && tgifSextouWords.length > 0) {
+                toggleTgifSextouBtn.addEventListener('click', () => {
+                    tgifSextouWords[currentTgifSextouIndex].classList.remove('active');
+                    currentTgifSextouIndex = (currentTgifSextouIndex + 1) % tgifSextouWords.length;
+                    setTimeout(() => {
+                        tgifSextouWords[currentTgifSextouIndex].classList.add('active');
+                    }, 500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
